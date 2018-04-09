@@ -18,7 +18,7 @@ export default {
     height: 100%;
   }
   body, #app {
-    background: #383c55;
+    background: #385e97;
   	font:12px "Open Sans", sans-serif;
     width: 100%;
     height: 100%;

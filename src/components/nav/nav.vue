@@ -1,62 +1,43 @@
 <template>
   <div id="wrapper">
 		<div class="menu">
-				<img id="menu-bg" src="@/assets/img/golden-gate-lights.jpg" />
+				<div id="menu-bg"></div>
 					<ul>
-							<li><a href="">About</a></li>
-							<li><a href="">Share</a></li>
-							<li><a href="">Activity</a></li>
-							<li><a href="">Settings</a></li>
-							<li><a href="">Contact</a></li>
+							<li><a href="">首页</a></li>
+							<li><a href="">项目详情</a></li>
+							<li><a href="">奖励详情</a></li>
+							<li><a href="">条件查询</a></li>
+							<!-- <li><router-link :to="{ name: 'DocNotice'}">文档通知</router-link></li> -->
 					</ul>
 			</div>
 
 			<div class="screen">
 					<div class="navbar"></div>
 					<div class="list">
-							<div class="item">
-									<div class="img"></div>
-									<span></span>
-									<span></span>
-									<span></span>
-							</div>
-
-							<div class="item">
-									<div class="img"></div>
-									<span></span>
-									<span></span>
-									<span></span>
-							</div>
-
-							<div class="item">
-									<div class="img"></div>
-									<span></span>
-									<span></span>
-									<span></span>
-							</div>
-
-							<div class="item">
-									<div class="img"></div>
-									<span></span>
-									<span></span>
-									<span></span>
-							</div>
+            <!-- <doc-notice v-if="this.isOn"></doc-notice> -->
+            <x-button :gradients="['#1D62F0', '#19D5FD']">iOS Gradients</x-button>
 					</div>
-
 					<div class="burger">
 							<div class="x"></div>
 							<div class="y"></div>
 							<div class="z"></div>
 					</div>
-			</div>
+        </div>
 	 </div>
 </template>
 
 <script>
+// import DocNotice from '../doc-notice/doc-notice.vue'
+import { XButton } from 'vux'
+
 export default {
+  components: {
+    // 'doc-notice': DocNotice,
+    XButton,
+  },
   data () {
     return {
-
+      // isOn: true
     }
   },
   created() {
@@ -113,7 +94,9 @@ export default {
     });
   },
   methods: {
+    DocNotice() {
 
+    }
   },
 }
 </script>
