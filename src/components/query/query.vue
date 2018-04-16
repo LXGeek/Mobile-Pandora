@@ -1,5 +1,5 @@
 <template>
-  <div class="doc-notice">
+  <div class="query">
 		<div class="menu">
 				<div id="menu-bg"></div>
         	<ul>
@@ -24,22 +24,33 @@
 			<div class="screen">
 					<div class="navbar"></div>
 					<div class="list">
-            <x-table :cell-bordered="false" :content-bordered="false" style="background-color:#fff;">
-              <thead>
-                <tr style="background-color: #F7F7F7">
-                  <th>标题</th>
-                  <th>发布部门</th>
-                  <th>发布时间</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr v-for="(item, index) in this.newsList" :index="index">
-                  <td>{{ item.newsTitle }}</td>
-                  <td>{{ item.pubDepart }}</td>
-                  <td>{{ item.pubTime }}</td>
-                </tr>
-              </tbody>
-            </x-table>
+            <group>
+              <datetime
+                v-model="value1"
+                @on-change="change"
+                :title="$t('开始时间')"
+                @on-cancel="log('cancel')"
+                @on-confirm="onConfirm"
+                @on-hide="log('hide', $event)"></datetime>
+            </group>
+            <group>
+              <datetime
+                v-model="value2"
+                @on-change="change"
+                :title="$t('截止时间')"
+                @on-cancel="log('cancel')"
+                @on-confirm="onConfirm"
+                @on-hide="log('hide', $event)"></datetime>
+            </group>
+            <group label-margin-right="15em">
+               <popup-picker title="奖励类型" :data="form.list" v-model="form.sort" value-text-align="left"></popup-picker>
+            </group>
+            <group>
+              <x-input title="关键词：" type="text" placeholder="" v-model="keyWords"></x-input>
+            </group>
+            <group>
+              <x-button type="primary" action-type="button" style="height: 50px;">查询</x-button>
+            </group>
           </div>
 					<div class="burger">
 							<div class="x"></div>
@@ -47,38 +58,38 @@
 							<div class="z"></div>
 					</div>
         </div>
-        <div v-transfer-dom>
-          <loading :show="show" text="正在加载"></loading>
-        </div>
 	 </div>
 </template>
+<i18n>
+
+</i18n>
 
 <script>
-const newsListUrl = 'https://easy-mock.com/mock/5ab605ce72286c70d351bc2f/example/newsList';
-
 import DocNotice from '../doc-notice/doc-notice.vue'
-import { XTable, XButton } from 'vux'
-import { Loading, TransferDomDirective as TransferDom } from 'vux'
+import { Datetime, Group, XButton, PopupPicker, XInput } from 'vux'
 
 export default {
-  directives: {
-    TransferDom
-  },
   components: {
     'doc-notice': DocNotice,
     XButton,
-    XTable,
-    Loading,
+    Datetime,
+    Group,
+    PopupPicker,
+    XInput,
   },
   data () {
     return {
       isOn: true,
-      newsList: [],
-      show: false,
+      value1: '2013-01-01',
+      value2: '2018-04-15',
+      form: {
+        sort: ['科研项目'],
+        list: [['科研项目', '科研获奖', '学术论文', '知识产权', '技术标准', '创作成果']],
+      },
+      keyWords: ''
     }
   },
   created() {
-    this.render();
     jQuery(document).ready(function(){
       if ('ontouchstart' in window) {
   		    var click = 'touchstart';
@@ -132,21 +143,6 @@ export default {
     });
   },
   methods: {
-    render() {
-      this.show = true;
-      this.axios.get(newsListUrl)
-      .then(resp => {
-        let respon = resp.data;
-
-        if(respon.success){
-          this.newsList = respon.data.newsList;
-        }
-        this.show = false;
-      }).catch(error => {
-        console.log(error.message);
-        this.show = false;
-      });
-    },
 
     jumpIndex() {
       this.$router.push({ path: '/index' });
@@ -170,20 +166,43 @@ export default {
 
     jumpSetting() {
       this.$router.push({ path: '/setting' });
-    }
+    },
+
+    change (value) {
+      console.log('change', value)
+    },
+
+    onConfirm (val) {
+      console.log('on-confirm arg', val)
+      console.log('current value', this.value1)
+    },
+
+    log (str1, str2 = '') {
+      console.log(str1, str2)
+    },
   },
 }
 </script>
 
 <style lang="scss">
   @import "../../assets/css/nav.scss";
-
- .doc-notice {
+  .query {
     .list {
-      .vux-table {
-        line-height: 90px;
+      .vux-datetime {
+        font-size: 30px;
+        text-decoration: none;
+      }
+      .weui-cells {
+        font-size: 30px;
+        line-height: 80px;
+      }
+      .weui-cell__ft:after {
+        width: 10px;
+        height: 10px;
+      }
+      button.weui-btn, input.weui-btn {
+        font-size: 30px;
       }
     }
-
   }
 </style>

@@ -16,10 +16,12 @@
     "jquery": "^3.3.1",
     "lib-flexible": "^0.3.2",
     "vue": "^2.5.2",
-    "vue-router": "^3.0.1"
+    "vue-router": "^3.0.1",
+    "vux": "^2.8.1"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
+    "axios": "^0.18.0",
     "babel-core": "^6.22.1",
     "babel-helper-vue-jsx-merge-props": "^2.0.3",
     "babel-jest": "^21.0.2",
@@ -70,7 +72,6 @@
     "vue-template-compiler": "^2.5.2",
     "vuex": "^3.0.1",
     "vuex-i18n": "^1.10.5",
-    "vux": "^2.8.1",
     "vux-loader": "^1.2.6",
     "webpack": "^3.6.0",
     "webpack-bundle-analyzer": "^2.9.0",

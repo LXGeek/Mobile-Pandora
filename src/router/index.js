@@ -1,21 +1,51 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Nav from '@/components/nav/nav.vue'
+import Index from '@/components/index/index.vue'
 import DocNotice from '@/components/doc-notice/doc-notice.vue'
+import Setting from '@/components/setting/setting.vue'
+import ProDetail from '@/components/pro-detail/pro-detail.vue'
+import Query from '@/components/query/query.vue'
+import ResDetail from '@/components/res-detail/res-detail.vue'
 
 Vue.use(Router)
 
 export default new Router({
+  mode: 'history',
   routes: [
     {
       path: '/',
-      name: 'Nav',
-      component: Nav
+      redirect: '/index',
+      component: Index
+    },
+    {
+      path: '/index',
+      name: 'Index',
+      component: Index
     },
     {
       path: '/doc-notice',
       name: 'DocNotice',
       component: DocNotice
+    },
+    {
+      path: '/setting',
+      name: 'Setting',
+      component: Setting
+    },
+    {
+      path: '/pro-detail',
+      name: 'ProDetail',
+      component: ProDetail
+    },
+    {
+      path: '/query',
+      name: 'Query',
+      component: Query
+    },
+    {
+      path: '/res-detail',
+      name: 'ResDetail',
+      component: ResDetail
     }
   ]
 })

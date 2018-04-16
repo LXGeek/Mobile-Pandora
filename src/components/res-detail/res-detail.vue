@@ -1,5 +1,5 @@
 <template>
-  <div class="doc-notice">
+  <div class="res-detail">
 		<div class="menu">
 				<div id="menu-bg"></div>
         	<ul>
@@ -23,62 +23,31 @@
 
 			<div class="screen">
 					<div class="navbar"></div>
-					<div class="list">
-            <x-table :cell-bordered="false" :content-bordered="false" style="background-color:#fff;">
-              <thead>
-                <tr style="background-color: #F7F7F7">
-                  <th>标题</th>
-                  <th>发布部门</th>
-                  <th>发布时间</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr v-for="(item, index) in this.newsList" :index="index">
-                  <td>{{ item.newsTitle }}</td>
-                  <td>{{ item.pubDepart }}</td>
-                  <td>{{ item.pubTime }}</td>
-                </tr>
-              </tbody>
-            </x-table>
-          </div>
+					<div class="list"></div>
 					<div class="burger">
 							<div class="x"></div>
 							<div class="y"></div>
 							<div class="z"></div>
 					</div>
         </div>
-        <div v-transfer-dom>
-          <loading :show="show" text="正在加载"></loading>
-        </div>
 	 </div>
 </template>
 
 <script>
-const newsListUrl = 'https://easy-mock.com/mock/5ab605ce72286c70d351bc2f/example/newsList';
-
 import DocNotice from '../doc-notice/doc-notice.vue'
-import { XTable, XButton } from 'vux'
-import { Loading, TransferDomDirective as TransferDom } from 'vux'
+import { XButton } from 'vux'
 
 export default {
-  directives: {
-    TransferDom
-  },
   components: {
     'doc-notice': DocNotice,
     XButton,
-    XTable,
-    Loading,
   },
   data () {
     return {
-      isOn: true,
-      newsList: [],
-      show: false,
+      isOn: true
     }
   },
   created() {
-    this.render();
     jQuery(document).ready(function(){
       if ('ontouchstart' in window) {
   		    var click = 'touchstart';
@@ -132,20 +101,8 @@ export default {
     });
   },
   methods: {
-    render() {
-      this.show = true;
-      this.axios.get(newsListUrl)
-      .then(resp => {
-        let respon = resp.data;
+    DocNotice() {
 
-        if(respon.success){
-          this.newsList = respon.data.newsList;
-        }
-        this.show = false;
-      }).catch(error => {
-        console.log(error.message);
-        this.show = false;
-      });
     },
 
     jumpIndex() {
@@ -177,13 +134,4 @@ export default {
 
 <style lang="scss">
   @import "../../assets/css/nav.scss";
-
- .doc-notice {
-    .list {
-      .vux-table {
-        line-height: 90px;
-      }
-    }
-
-  }
 </style>

@@ -2,21 +2,28 @@
   <div id="wrapper">
 		<div class="menu">
 				<div id="menu-bg"></div>
-					<ul>
-							<li><a href="">首页</a></li>
-							<li><a href="">项目详情</a></li>
-							<li><a href="">奖励详情</a></li>
-							<li><a href="">条件查询</a></li>
-							<!-- <li><router-link :to="{ name: 'DocNotice'}">文档通知</router-link></li> -->
+        	<ul>
+              <li>
+                 <div id="head-img">
+                   <img class="head-img" src="../../assets/img/boy.svg" alt="">
+                 </div>
+              </li>
+              <li>Hi~ 小明</li>
+              <li @click="jumpIndex">首页</li>
+							<li @click="jumpProDetail">项目详情</li>
+							<li @click="jumpResDetail">奖励详情</li>
+							<li @click="jumpQuery">条件查询</li>
+							<li @click="jumpDoc">文档通知</li>
+              <li>
+                <img @click="jumpSetting" class="head-set" src="../../assets/img/set.svg" alt="">
+              </li>
+              <li>退出</li>
 					</ul>
 			</div>
 
 			<div class="screen">
 					<div class="navbar"></div>
-					<div class="list">
-            <!-- <doc-notice v-if="this.isOn"></doc-notice> -->
-            <x-button :gradients="['#1D62F0', '#19D5FD']">iOS Gradients</x-button>
-					</div>
+					<div class="list"></div>
 					<div class="burger">
 							<div class="x"></div>
 							<div class="y"></div>
@@ -27,17 +34,17 @@
 </template>
 
 <script>
-// import DocNotice from '../doc-notice/doc-notice.vue'
+import DocNotice from '../doc-notice/doc-notice.vue'
 import { XButton } from 'vux'
 
 export default {
   components: {
-    // 'doc-notice': DocNotice,
+    'doc-notice': DocNotice,
     XButton,
   },
   data () {
     return {
-      // isOn: true
+      isOn: true
     }
   },
   created() {
@@ -96,11 +103,35 @@ export default {
   methods: {
     DocNotice() {
 
+    },
+
+    jumpIndex() {
+      this.$router.push({ path: '/index' });
+    },
+
+    jumpProDetail() {
+      this.$router.push({ path: '/pro-detail' });
+    },
+
+    jumpResDetail() {
+      this.$router.push({ path: '/res-detail' });
+    },
+
+    jumpQuery() {
+      this.$router.push({ path: '/query' });
+    },
+
+    jumpDoc() {
+      this.$router.push({ path: '/doc-notice' });
+    },
+
+    jumpSetting() {
+      this.$router.push({ path: '/setting' });
     }
   },
 }
 </script>
 
 <style lang="scss">
-  @import "./nav.scss";
+  @import "../../assets/css/nav.scss";
 </style>

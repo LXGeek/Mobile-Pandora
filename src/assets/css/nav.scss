@@ -28,7 +28,7 @@ div.screen.animate{
 	        transition: all 500ms cubic-bezier(0.000, 0.995, 0.990, 1.000);
 }
 
-.list{margin-top:36px; text-align:left;}
+.list{ text-align:center;}
 .item{
 	height:115px;
 	margin-top:30px 0;
@@ -133,8 +133,14 @@ div.burger {
 	}
 
 div.navbar{
-  height:73px;
+  height:100px;
 	background:#214273;
+
+	.per-infor {
+		color: #ffffff;
+		display: flex;
+		float: right;
+	}
 }
 
 div.menu {
@@ -182,8 +188,28 @@ div.menu ul li {
 	width: 100%;
 	margin-top: 40px;
 	text-align: left;
-	padding-left: 120px;
-	font-size: 23px;
+	padding-left: 100px;
+	font-size: 30px;
+	color: #ffffff;
+}
+#head-img {
+	color: #ffffff;
+	display: flex;
+	.head-img {
+		width: 90px;
+		height: 90px;
+		border-radius: 50%;
+		background-color: #ffffff;
+	}
+  p {
+		line-height: 90px;
+		margin-left: 10px;
+	}
+}
+
+.head-set {
+	width: 50px;
+	height: 50px;
 }
 div.menu ul li a {
 	color:#fff;
