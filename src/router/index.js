@@ -6,6 +6,7 @@ import Setting from '@/components/setting/setting.vue'
 import ProDetail from '@/components/pro-detail/pro-detail.vue'
 import Query from '@/components/query/query.vue'
 import ResDetail from '@/components/res-detail/res-detail.vue'
+import QueryList from '@/components/query-list/query-list.vue'
 
 Vue.use(Router)
 
@@ -46,6 +47,11 @@ export default new Router({
       path: '/res-detail',
       name: 'ResDetail',
       component: ResDetail
+    },
+    {
+      path: '/query-list',
+      name: 'QueryList',
+      component: QueryList
     }
   ]
 })
