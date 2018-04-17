@@ -199,6 +199,5 @@ export default {
          line-height: 90px;
        }
      }
-
    }
 </style>

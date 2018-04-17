@@ -25,7 +25,7 @@
 					<div class="navbar"></div>
 					<div class="list">
             <group>
-              <selector ref="defaultValueRef" title="奖励类别" direction="rtl" :options="list1" v-model="defaultValue1"></selector>
+              <selector ref="defaultValueRef" title="项目类型" direction="rtl" :options="list1" v-model="defaultValue1"></selector>
             </group>
             <group>
               <selector ref="defaultValueRef" title="奖励类别" direction="rtl" :options="list2" v-model="defaultValue2"></selector>
@@ -47,7 +47,7 @@
              <group>
                <tab :line-width=2 active-color='#214273' v-model="index">
                  <tab-item selected>项目一览</tab-item>
-                 <tab-item @click.native="load">奖励一览</tab-item>
+                 <tab-item>奖励一览</tab-item>
                </tab>
                <swiper height="100px" :show-dots="false" v-model="index">
                  <swiper-item>
@@ -103,6 +103,9 @@
 							<div class="z"></div>
 					</div>
         </div>
+        <div v-transfer-dom>
+          <loading :show="show" text="正在加载"></loading>
+        </div>
 	 </div>
 </template>
 
@@ -113,9 +116,14 @@ const awardsUrl = 'https://easy-mock.com/mock/5ab605ce72286c70d351bc2f/example/r
 import DocNotice from '../doc-notice/doc-notice.vue'
 import { XButton, Selector, Group, DatetimeView, Datetime} from 'vux'
 import { Tab, TabItem, Sticky, Divider, Swiper, SwiperItem, XTable } from 'vux'
+import { Loading, TransferDomDirective as TransferDom } from 'vux'
+
 
 
 export default {
+  directives: {
+    TransferDom
+  },
   components: {
     XButton,
     Selector,
@@ -126,7 +134,8 @@ export default {
     TabItem,
     Swiper,
     SwiperItem,
-    XTable
+    XTable,
+    Loading
   },
   data () {
     return {
@@ -141,10 +150,12 @@ export default {
       format: 'YYYY',
       projectList: [],
       rewardList: [],
+      show: false,
     }
   },
   created() {
     this.render();
+    this.load();
     jQuery(document).ready(function(){
       if ('ontouchstart' in window) {
   		    var click = 'touchstart';
@@ -199,6 +210,7 @@ export default {
   },
   methods: {
     render() {
+      this.show = true;
       this.axios.get(proUrl)
       .then(resp => {
         let respon = resp.data;
@@ -206,8 +218,10 @@ export default {
         if(respon.success){
           this.projectList = respon.data.projectList;
         }
+        this.show = false;
       }).catch( error => {
         console.log(error.message);
+        this.show = false;
       })
     },
 
@@ -276,7 +290,6 @@ export default {
           }
         }
       }
-
       .vux-slider {
         height: 900px;
         .vux-swiper {

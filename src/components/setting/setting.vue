@@ -231,7 +231,6 @@ export default {
         height: 900px !important;
         .vux-swiper-item {
           height: 900px;
-
         }
         .weui-cells {
           line-height: 100px;
