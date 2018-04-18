@@ -17,6 +17,7 @@
               <li>
                 <img @click="jumpSetting" class="head-set" src="../../assets/img/set.svg" alt="">
               </li>
+              
               <li>退出</li>
 					</ul>
 			</div>
