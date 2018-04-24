@@ -22,5 +22,7 @@ export default {
   	font:12px "Open Sans", sans-serif;
     width: 100%;
     height: 100%;
+    margin: 0;
+    padding: 0;
   }
 </style>
