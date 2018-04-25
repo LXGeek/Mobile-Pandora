@@ -8,6 +8,7 @@ import Query from '@/components/query/query.vue'
 import ResDetail from '@/components/res-detail/res-detail.vue'
 import QueryList from '@/components/query-list/query-list.vue'
 import Login from '@/components/login/login.vue'
+import ForgetPass from '@/components/forget-pass/forget-pass.vue'
 
 Vue.use(Router)
 
@@ -58,6 +59,11 @@ export default new Router({
       path: '/query-list',
       name: 'QueryList',
       component: QueryList
+    },
+    {
+      path: '/forget-pass',
+      name: 'ForgetPasss',
+      component: ForgetPass
     }
   ]
 })
