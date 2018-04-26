@@ -41,7 +41,7 @@
                </datetime>
              </group>
              <group>
-               <x-button type="primary" action-type="button" style="height: 50px;" @click.native="searchQuery">点击查询</x-button>
+               <x-button type="primary" action-type="button" style="height: 50px;">点击查询</x-button>
              </group>
 
              <group>
