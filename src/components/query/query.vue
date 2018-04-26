@@ -17,7 +17,7 @@
               <li>
                 <img @click="jumpSetting" class="head-set" src="../../assets/img/set.svg" alt="">
               </li>
-              <li>退出</li>
+              <li @click="quit()">退出</li>
 					</ul>
 			</div>
 
@@ -143,6 +143,10 @@ export default {
     });
   },
   methods: {
+    quit() {
+      this.$router.push({ path: '/login' });
+    },
+    
     jumpIndex() {
       this.$router.push({ path: '/index' });
     },

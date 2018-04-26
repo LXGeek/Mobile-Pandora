@@ -8,7 +8,7 @@
       <div class="infor">
         <input class="acc-number" type="text" name="" value="" placeholder="账号" ref="name">
         <input class="password" type="password" name="" value="" placeholder="密码" ref="password">
-        <div class="submit">Login</div>
+        <div class="submit" @click="login()">Login</div>
         <div class="other">
           <div class="reset" @click="reset()">重置</div>
           <div class="forgetPass" @click="forgetPass()">忘记密码?</div>
@@ -21,6 +21,9 @@
 <script>
 export default {
   methods: {
+    login() {
+      this.$router.push({ path: '/index' });
+    },
     reset() {
       this.$refs.name.value = '';
       this.$refs.password.value = '';

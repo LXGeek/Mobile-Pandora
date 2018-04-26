@@ -17,37 +17,76 @@
               <li>
                 <img @click="jumpSetting" class="head-set" src="../../assets/img/set.svg" alt="">
               </li>
-              <li>退出</li>
+              <li @click="quit()">退出</li>
 					</ul>
 			</div>
 
 			<div class="screen">
 					<div class="navbar"></div>
-					<div class="list"></div>
+					<div class="list">
+            <x-table :cell-bordered="false" :content-bordered="false" style="background-color:#fff;">
+              <thead>
+                <tr style="background-color: #F7F7F7">
+                  <th>获奖名称</th>
+                  <th>申请人</th>
+                  <th>奖励</th>
+                  <th>获取时间</th>
+                  <th>审核状态</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="(item, index) in this.tableList" :index="index">
+                  <td>{{ item.awardedName }}</td>
+                  <td>{{ item.applicant }}</td>
+                  <td>{{ item.reward }}</td>
+                  <td>{{ item.getTime }}</td>
+                  <td>{{ item.status }}</td>
+
+                </tr>
+              </tbody>
+            </x-table>
+          </div>
 					<div class="burger">
 							<div class="x"></div>
 							<div class="y"></div>
 							<div class="z"></div>
 					</div>
+          <div v-transfer-dom>
+            <loading :show="show" text="正在加载"></loading>
+          </div>
         </div>
 	 </div>
 </template>
 
 <script>
+const queryListUrl = 'https://easy-mock.com/mock/5ab605ce72286c70d351bc2f/example/queryList';
+
 import DocNotice from '../doc-notice/doc-notice.vue'
-import { XButton } from 'vux'
+import { Datetime, Group, XButton, PopupPicker, XInput, XTable } from 'vux'
+import { Loading, TransferDomDirective as TransferDom } from 'vux'
 
 export default {
+  directives: {
+    TransferDom
+  },
   components: {
-    'doc-notice': DocNotice,
     XButton,
+    Datetime,
+    Group,
+    PopupPicker,
+    XInput,
+    XTable,
+    Loading
   },
   data () {
     return {
-      isOn: true
+      isOn: true,
+      tableList: [],
+      show: false,
     }
   },
   created() {
+    this.render();
     jQuery(document).ready(function(){
       if ('ontouchstart' in window) {
   		    var click = 'touchstart';
@@ -101,8 +140,24 @@ export default {
     });
   },
   methods: {
-    DocNotice() {
+    render() {
+      this.show = true;
+      this.axios.get(queryListUrl)
+      .then(resp => {
+        let respon = resp.data;
 
+        if(respon.success){
+          this.tableList = respon.data.tableList;
+        }
+        this.show = false;
+      }).catch(error => {
+        console.log(error.message);
+        this.show = false;
+      });
+    },
+
+    quit() {
+      this.$router.push({ path: '/login' });
     },
 
     jumpIndex() {
@@ -134,4 +189,11 @@ export default {
 
 <style lang="scss">
   @import "../../assets/css/nav.scss";
+  .pro-detail {
+     .list {
+       .vux-table {
+         line-height: 90px;
+       }
+     }
+   }
 </style>
